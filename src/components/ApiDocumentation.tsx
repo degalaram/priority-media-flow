@@ -60,19 +60,19 @@ export const ApiDocumentation = () => {
                   <span className="font-mono text-xs text-muted-foreground font-medium">Description</span>
                 </div>
                 <div className="grid grid-cols-3 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-primary">source_file</span>
-                  <span className="font-mono text-xs text-muted-foreground">String</span>
+                  <span className="font-mono text-xs text-primary">Source File</span>
+                  <span className="font-mono text-xs text-muted-foreground">Text</span>
                   <span className="font-mono text-xs text-foreground">Input file name</span>
                 </div>
                 <div className="grid grid-cols-3 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-primary">target_format</span>
-                  <span className="font-mono text-xs text-muted-foreground">String</span>
+                  <span className="font-mono text-xs text-primary">Target Format</span>
+                  <span className="font-mono text-xs text-muted-foreground">Text</span>
                   <span className="font-mono text-xs text-foreground">Output format (mp4, avi, etc.)</span>
                 </div>
                 <div className="grid grid-cols-3 p-3">
-                  <span className="font-mono text-xs text-primary">priority</span>
-                  <span className="font-mono text-xs text-muted-foreground">String</span>
-                  <span className="font-mono text-xs text-foreground">"high" or "low"</span>
+                  <span className="font-mono text-xs text-primary">Priority</span>
+                  <span className="font-mono text-xs text-muted-foreground">Text</span>
+                  <span className="font-mono text-xs text-foreground">High or Low</span>
                 </div>
               </div>
             </div>
@@ -89,19 +89,19 @@ export const ApiDocumentation = () => {
                   <span className="font-mono text-xs text-muted-foreground font-medium">Description</span>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-foreground">job_id</span>
+                  <span className="font-mono text-xs text-foreground">Job ID</span>
                   <span className="font-mono text-xs text-muted-foreground">Unique identifier for tracking</span>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-foreground">status</span>
-                  <span className="font-mono text-xs text-muted-foreground">Initial status (PENDING)</span>
+                  <span className="font-mono text-xs text-foreground">Status</span>
+                  <span className="font-mono text-xs text-muted-foreground">Initial status (Pending)</span>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-foreground">created_at</span>
+                  <span className="font-mono text-xs text-foreground">Created At</span>
                   <span className="font-mono text-xs text-muted-foreground">Timestamp when job was created</span>
                 </div>
                 <div className="grid grid-cols-2 p-3">
-                  <span className="font-mono text-xs text-foreground">message</span>
+                  <span className="font-mono text-xs text-foreground">Message</span>
                   <span className="font-mono text-xs text-muted-foreground">Success confirmation</span>
                 </div>
               </div>
@@ -158,27 +158,27 @@ export const ApiDocumentation = () => {
                   <span className="font-mono text-xs text-muted-foreground font-medium">Description</span>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-foreground">status</span>
-                  <span className="font-mono text-xs text-muted-foreground">PENDING, QUEUED, IN_PROGRESS, COMPLETED, FAILED</span>
+                  <span className="font-mono text-xs text-foreground">Status</span>
+                  <span className="font-mono text-xs text-muted-foreground">Pending, Queued, In Progress, Completed, Failed</span>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-foreground">priority</span>
+                  <span className="font-mono text-xs text-foreground">Priority</span>
                   <span className="font-mono text-xs text-muted-foreground">High or Low</span>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-foreground">queued_at</span>
+                  <span className="font-mono text-xs text-foreground">Queued At</span>
                   <span className="font-mono text-xs text-muted-foreground">When job entered queue</span>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-foreground">started_at</span>
+                  <span className="font-mono text-xs text-foreground">Started At</span>
                   <span className="font-mono text-xs text-muted-foreground">When processing began</span>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-b border-border/30">
-                  <span className="font-mono text-xs text-foreground">completed_at</span>
+                  <span className="font-mono text-xs text-foreground">Completed At</span>
                   <span className="font-mono text-xs text-muted-foreground">When processing finished</span>
                 </div>
                 <div className="grid grid-cols-2 p-3">
-                  <span className="font-mono text-xs text-foreground">metrics</span>
+                  <span className="font-mono text-xs text-foreground">Metrics</span>
                   <span className="font-mono text-xs text-muted-foreground">CPU and memory usage (when complete)</span>
                 </div>
               </div>
@@ -190,13 +190,13 @@ export const ApiDocumentation = () => {
                 Job Status Values
               </span>
               <div className="flex flex-wrap gap-2">
-                <span className="px-2 py-1 rounded bg-muted-foreground/20 text-xs font-mono">PENDING</span>
+                <span className="px-2 py-1 rounded bg-muted-foreground/20 text-xs font-mono">Pending</span>
                 <ArrowRight className="h-3 w-3 text-muted-foreground self-center" />
-                <span className="px-2 py-1 rounded bg-primary/20 text-primary text-xs font-mono">QUEUED</span>
+                <span className="px-2 py-1 rounded bg-primary/20 text-primary text-xs font-mono">Queued</span>
                 <ArrowRight className="h-3 w-3 text-muted-foreground self-center" />
-                <span className="px-2 py-1 rounded bg-warning/20 text-warning text-xs font-mono">IN_PROGRESS</span>
+                <span className="px-2 py-1 rounded bg-warning/20 text-warning text-xs font-mono">In Progress</span>
                 <ArrowRight className="h-3 w-3 text-muted-foreground self-center" />
-                <span className="px-2 py-1 rounded bg-success/20 text-success text-xs font-mono">COMPLETED</span>
+                <span className="px-2 py-1 rounded bg-success/20 text-success text-xs font-mono">Completed</span>
               </div>
             </div>
             

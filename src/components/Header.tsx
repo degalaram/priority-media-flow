@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Terminal, Send, LayoutDashboard, BookOpen, Presentation } from "lucide-react";
+import { Terminal, Send, LayoutDashboard, BookOpen, Download } from "lucide-react";
 
 export const Header = () => {
   const location = useLocation();
@@ -9,8 +9,16 @@ export const Header = () => {
     { href: "/", label: "Submit Job", icon: Send },
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/docs", label: "Docs", icon: BookOpen },
-    { href: "/presentation", label: "PPT", icon: Presentation },
   ];
+  
+  const handleDownloadPPT = () => {
+    const link = document.createElement('a');
+    link.href = '/Priority_Media_Processor_Presentation.html';
+    link.download = 'Priority_Media_Processor_Presentation.html';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -50,6 +58,15 @@ export const Header = () => {
               </Link>
             );
           })}
+          
+          {/* Download PPT Button */}
+          <button
+            onClick={handleDownloadPPT}
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-mono text-xs sm:text-sm transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-muted"
+          >
+            <Download className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">PPT</span>
+          </button>
         </nav>
       </div>
     </header>
