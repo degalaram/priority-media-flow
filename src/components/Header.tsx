@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Terminal, Send, LayoutDashboard, BookOpen } from "lucide-react";
+import { Terminal, Send, LayoutDashboard, BookOpen, Presentation } from "lucide-react";
 
 export const Header = () => {
   const location = useLocation();
@@ -9,6 +9,7 @@ export const Header = () => {
     { href: "/", label: "Submit Job", icon: Send },
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/docs", label: "Docs", icon: BookOpen },
+    { href: "/presentation", label: "PPT", icon: Presentation },
   ];
   
   return (
