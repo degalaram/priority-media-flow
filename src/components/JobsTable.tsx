@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { getAllJobs, type Job } from "@/lib/jobStore";
 import { StatusBadge } from "./StatusBadge";
 import { PriorityBadge } from "./PriorityBadge";
-import { RefreshCw, Database, Cpu, HardDrive } from "lucide-react";
+import { RefreshCw, Database, Cpu, HardDrive, FileType, ArrowRight } from "lucide-react";
 import { format } from "date-fns";
 
 const formatDate = (date: Date | null) => {
@@ -100,6 +100,11 @@ export const JobsTable = () => {
               <TableHeader>
                 <TableRow className="border-border/30 hover:bg-transparent">
                   <TableHead className="font-mono text-xs text-muted-foreground">Job ID</TableHead>
+                  <TableHead className="font-mono text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <FileType className="h-3 w-3" /> Conversion
+                    </span>
+                  </TableHead>
                   <TableHead className="font-mono text-xs text-muted-foreground">Priority</TableHead>
                   <TableHead className="font-mono text-xs text-muted-foreground">Status</TableHead>
                   <TableHead className="font-mono text-xs text-muted-foreground">Queued At</TableHead>
@@ -121,7 +126,14 @@ export const JobsTable = () => {
                 {jobs.map((job) => (
                   <TableRow key={job.id} className="border-border/20 hover:bg-muted/30">
                     <TableCell className="font-mono text-xs text-foreground/80">
-                      {job.id.slice(0, 20)}...
+                      {job.id.slice(0, 18)}...
+                    </TableCell>
+                    <TableCell className="font-mono text-xs">
+                      <span className="flex items-center gap-1">
+                        <span className="text-foreground/70">{job.sourceFile}</span>
+                        <ArrowRight className="h-3 w-3 text-primary" />
+                        <span className="text-primary">{job.targetFormat}</span>
+                      </span>
                     </TableCell>
                     <TableCell>
                       <PriorityBadge priority={job.priority} />
