@@ -12,15 +12,15 @@ interface StatCardProps {
 
 const StatCard = ({ icon, label, value, color }: StatCardProps) => (
   <Card className="border-border/50 bg-card/50">
-    <CardContent className="p-4">
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          <p className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+    <CardContent className="p-3 sm:p-4">
+      <div className="flex items-center justify-between gap-2">
+        <div className="space-y-1 min-w-0">
+          <p className="font-mono text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider truncate">
             {label}
           </p>
-          <p className={`font-mono text-2xl font-bold ${color}`}>{value}</p>
+          <p className={`font-mono text-xl sm:text-2xl font-bold ${color}`}>{value}</p>
         </div>
-        <div className={`p-2 rounded-lg ${color.replace('text-', 'bg-')}/10`}>
+        <div className={`p-2 rounded-lg shrink-0 ${color.replace('text-', 'bg-')}/10`}>
           {icon}
         </div>
       </div>
@@ -39,7 +39,7 @@ export const QueueStats = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
       <StatCard
         icon={<Layers className="h-5 w-5 text-foreground" />}
         label="Total Jobs"
