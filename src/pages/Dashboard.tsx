@@ -1,6 +1,8 @@
 import { Header } from "@/components/Header";
 import { JobsTable } from "@/components/JobsTable";
 import { QueueStats } from "@/components/QueueStats";
+import { QueueVisualization } from "@/components/QueueVisualization";
+import { JobLookup } from "@/components/JobLookup";
 import { Button } from "@/components/ui/button";
 import { clearAllJobs } from "@/lib/jobStore";
 import { Trash2 } from "lucide-react";
@@ -46,6 +48,12 @@ const Dashboard = () => {
         
         {/* Queue Stats */}
         <QueueStats />
+        
+        {/* Queue Visualization */}
+        <QueueVisualization />
+        
+        {/* Job Lookup */}
+        <JobLookup />
         
         {/* Jobs Table */}
         <JobsTable />
