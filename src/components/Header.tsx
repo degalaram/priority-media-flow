@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Terminal, Send, LayoutDashboard, BookOpen, Download } from "lucide-react";
+import { Terminal, Send, LayoutDashboard, BookOpen, Download, FileText } from "lucide-react";
 
 export const Header = () => {
   const location = useLocation();
@@ -12,12 +12,11 @@ export const Header = () => {
   ];
   
   const handleDownloadPPT = () => {
-    const link = document.createElement('a');
-    link.href = '/Priority_Media_Processor_Presentation.html';
-    link.download = 'Priority_Media_Processor_Presentation.html';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    window.open('/Priority_Media_Processor_Presentation.html', '_blank');
+  };
+
+  const handleDownloadBackend = () => {
+    window.open('/django_backend/README.md', '_blank');
   };
   
   return (
@@ -63,9 +62,20 @@ export const Header = () => {
           <button
             onClick={handleDownloadPPT}
             className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-mono text-xs sm:text-sm transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-muted"
+            title="Open Presentation (Print to PDF)"
+          >
+            <FileText className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">PPT</span>
+          </button>
+
+          {/* Download Backend Code */}
+          <button
+            onClick={handleDownloadBackend}
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg font-mono text-xs sm:text-sm transition-all duration-200 text-accent hover:text-foreground hover:bg-accent/10"
+            title="View Django Backend Code"
           >
             <Download className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-            <span className="hidden sm:inline">PPT</span>
+            <span className="hidden sm:inline">Code</span>
           </button>
         </nav>
       </div>
