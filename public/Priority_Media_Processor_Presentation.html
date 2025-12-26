@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priority Media Processor - Project Presentation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f1419; color: #e7e9ea; }
+        .slide { min-height: 100vh; padding: 60px; display: flex; flex-direction: column; justify-content: center; page-break-after: always; }
+        h1 { font-size: 48px; color: #00d4aa; margin-bottom: 20px; }
+        h2 { font-size: 36px; color: #00d4aa; margin-bottom: 30px; border-bottom: 2px solid #00d4aa; padding-bottom: 10px; }
+        h3 { font-size: 24px; color: #f7931a; margin: 20px 0 10px; }
+        p, li { font-size: 20px; line-height: 1.8; color: #b0b3b8; }
+        ul { margin-left: 40px; }
+        li { margin: 10px 0; }
+        .highlight { color: #00d4aa; font-weight: bold; }
+        .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin: 30px 0; }
+        .tech-card { background: #1a2332; border: 1px solid #2d3748; border-radius: 12px; padding: 25px; }
+        .tech-card h4 { color: #00d4aa; font-size: 22px; margin-bottom: 10px; }
+        .flow-box { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 30px 0; }
+        .flow-item { background: #1a2332; padding: 15px 25px; border-radius: 8px; border: 1px solid #2d3748; }
+        .arrow { color: #00d4aa; font-size: 24px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .table th, .table td { border: 1px solid #2d3748; padding: 15px; text-align: left; }
+        .table th { background: #1a2332; color: #00d4aa; }
+        .center { text-align: center; }
+        .slide-number { position: absolute; bottom: 30px; right: 40px; color: #666; font-size: 16px; }
+        @media print { .slide { page-break-after: always; } }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide center">
+    <h1>Priority Media Processor</h1>
+    <p style="font-size: 28px; margin: 20px 0;">Backend System for Asynchronous Job Processing</p>
+    <p style="margin-top: 40px;">A robust system for managing media processing jobs with priority-based queues, lifecycle management, and resource tracking.</p>
+    <div class="slide-number">1 / 8</div>
+</div>
+
+<!-- Slide 2: Project Goal -->
+<div class="slide">
+    <h2>Project Goal</h2>
+    <p style="font-size: 24px; margin-bottom: 30px;">Build a robust backend system that manages asynchronous media processing jobs with:</p>
+    <ul>
+        <li><span class="highlight">Job Submission</span> - Accept processing requests via REST API</li>
+        <li><span class="highlight">Priority Queues</span> - Route jobs to dedicated high/low priority queues</li>
+        <li><span class="highlight">Background Processing</span> - Handle intensive computation with Celery workers</li>
+        <li><span class="highlight">Lifecycle Tracking</span> - Track job states from submission to completion</li>
+        <li><span class="highlight">Resource Monitoring</span> - Log CPU and memory usage for each job</li>
+        <li><span class="highlight">Status Reporting</span> - Provide real-time job status via API</li>
+    </ul>
+    <div class="slide-number">2 / 8</div>
+</div>
+
+<!-- Slide 3: Technology Stack -->
+<div class="slide">
+    <h2>Technology Stack</h2>
+    <div class="tech-grid">
+        <div class="tech-card">
+            <h4>Django</h4>
+            <p>Python web framework for building the REST API endpoints and handling job submissions.</p>
+        </div>
+        <div class="tech-card">
+            <h4>Celery</h4>
+            <p>Distributed task queue for background job processing with multi-queue support.</p>
+        </div>
+        <div class="tech-card">
+            <h4>Redis</h4>
+            <p>In-memory message broker for fast communication between API and workers.</p>
+        </div>
+        <div class="tech-card">
+            <h4>PostgreSQL</h4>
+            <p>Relational database for persistent storage of jobs and metrics data.</p>
+        </div>
+    </div>
+    <h3>Frontend Demo</h3>
+    <p>React + TypeScript + Tailwind CSS + Vite for the demonstration interface.</p>
+    <div class="slide-number">3 / 8</div>
+</div>
+
+<!-- Slide 4: System Architecture -->
+<div class="slide">
+    <h2>System Architecture</h2>
+    <div class="flow-box">
+        <div class="flow-item">Client</div>
+        <span class="arrow">→</span>
+        <div class="flow-item">Django API</div>
+        <span class="arrow">→</span>
+        <div class="flow-item">Redis Broker</div>
+        <span class="arrow">→</span>
+        <div class="flow-item">Celery Workers</div>
+        <span class="arrow">→</span>
+        <div class="flow-item">PostgreSQL</div>
+    </div>
+    <h3>How It Works</h3>
+    <ul>
+        <li><span class="highlight">Step 1:</span> Client sends job request to Django REST API</li>
+        <li><span class="highlight">Step 2:</span> API validates input and saves job to database</li>
+        <li><span class="highlight">Step 3:</span> Job is routed to Redis based on priority</li>
+        <li><span class="highlight">Step 4:</span> Celery worker picks up and processes the job</li>
+        <li><span class="highlight">Step 5:</span> Results and metrics are saved to PostgreSQL</li>
+    </ul>
+    <div class="slide-number">4 / 8</div>
+</div>
+
+<!-- Slide 5: Database Design -->
+<div class="slide">
+    <h2>Database Design</h2>
+    <h3>Job Table (Operational State)</h3>
+    <table class="table">
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td>ID</td><td>Primary Key</td><td>Unique job identifier</td></tr>
+        <tr><td>Source File</td><td>Text</td><td>Input file name</td></tr>
+        <tr><td>Target Format</td><td>Text</td><td>Output format</td></tr>
+        <tr><td>Priority</td><td>Enum</td><td>High or Low</td></tr>
+        <tr><td>Status</td><td>Enum</td><td>Current job state</td></tr>
+        <tr><td>Timestamps</td><td>DateTime</td><td>Created, Queued, Started, Completed</td></tr>
+    </table>
+    <h3>Job Metrics Table (Resource Usage)</h3>
+    <table class="table">
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td>ID</td><td>Primary Key</td><td>Metrics record ID</td></tr>
+        <tr><td>Job ID</td><td>Foreign Key</td><td>Links to Job table</td></tr>
+        <tr><td>Peak CPU</td><td>Integer</td><td>Maximum CPU percentage</td></tr>
+        <tr><td>Memory</td><td>Integer</td><td>Memory usage in MB</td></tr>
+    </table>
+    <div class="slide-number">5 / 8</div>
+</div>
+
+<!-- Slide 6: API Endpoints -->
+<div class="slide">
+    <h2>API Endpoints</h2>
+    <h3>POST /api/v1/submit_job</h3>
+    <p>Submit a new media processing job</p>
+    <ul>
+        <li><span class="highlight">Input:</span> Source file, target format, priority level</li>
+        <li><span class="highlight">Action:</span> Validates, saves to database, routes to queue</li>
+        <li><span class="highlight">Output:</span> Job ID for tracking</li>
+    </ul>
+    <h3>GET /api/v1/job/{id}/status</h3>
+    <p>Retrieve job status and resource metrics</p>
+    <ul>
+        <li><span class="highlight">Input:</span> Job ID</li>
+        <li><span class="highlight">Output:</span> Current status, all timestamps, metrics (if completed)</li>
+    </ul>
+    <div class="slide-number">6 / 8</div>
+</div>
+
+<!-- Slide 7: Job Lifecycle -->
+<div class="slide">
+    <h2>Job Lifecycle & Priority Queues</h2>
+    <h3>Job State Machine</h3>
+    <div class="flow-box">
+        <div class="flow-item">PENDING</div>
+        <span class="arrow">→</span>
+        <div class="flow-item">QUEUED</div>
+        <span class="arrow">→</span>
+        <div class="flow-item">IN PROGRESS</div>
+        <span class="arrow">→</span>
+        <div class="flow-item" style="border-color: #00d4aa;">COMPLETED</div>
+    </div>
+    <h3>Priority Queue Configuration</h3>
+    <table class="table">
+        <tr><th>Queue</th><th>Workers</th><th>Queue Delay</th><th>Processing Time</th></tr>
+        <tr><td style="color: #f7931a;">High Priority</td><td>4 concurrent</td><td>0.5 - 1 second</td><td>3 - 5 seconds</td></tr>
+        <tr><td style="color: #00d4aa;">Low Priority</td><td>2 concurrent</td><td>1 - 3 seconds</td><td>5 - 10 seconds</td></tr>
+    </table>
+    <p style="margin-top: 20px;">Jobs are automatically routed to the correct queue based on the priority specified at submission.</p>
+    <div class="slide-number">7 / 8</div>
+</div>
+
+<!-- Slide 8: Features & Conclusion -->
+<div class="slide">
+    <h2>Key Features Implemented</h2>
+    <ul>
+        <li>✓ REST API endpoints for job submission and status</li>
+        <li>✓ Priority-based queue routing (high/low)</li>
+        <li>✓ Complete job lifecycle tracking with timestamps</li>
+        <li>✓ Simulated resource usage monitoring (CPU, Memory)</li>
+        <li>✓ Separate database tables for state and metrics</li>
+        <li>✓ Multi-worker Celery configuration</li>
+        <li>✓ Real-time status updates</li>
+        <li>✓ Docker-ready deployment configuration</li>
+    </ul>
+    <h3 style="margin-top: 40px;">Use Cases</h3>
+    <p>Video transcoding, image processing, document conversion, batch media operations, content delivery pipelines.</p>
+    <div class="slide-number">8 / 8</div>
+</div>
+
+</body>
+</html>

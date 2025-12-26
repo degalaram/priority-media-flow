@@ -25,58 +25,58 @@ export const DatabaseSchema = () => {
             <div className="flex items-center gap-2 mb-4">
               <Database className="h-4 w-4 text-primary" />
               <span className="font-mono text-sm font-semibold text-foreground">
-                Job
+                Job Table
               </span>
               <span className="font-mono text-xs text-muted-foreground">
-                (Operational State)
+                (Stores Job Details)
               </span>
             </div>
             
             <div className="space-y-2 font-mono text-xs">
               <div className="flex items-center gap-2 p-2 rounded bg-background/50 border border-primary/20">
                 <Key className="h-3 w-3 text-primary" />
-                <span className="text-primary font-semibold">id</span>
-                <span className="text-muted-foreground ml-auto">VARCHAR(50) PK</span>
+                <span className="text-primary font-semibold">ID</span>
+                <span className="text-muted-foreground ml-auto">Primary Key</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">source_file</span>
-                <span className="text-muted-foreground ml-auto">VARCHAR(255)</span>
+                <span className="text-foreground">Source File</span>
+                <span className="text-muted-foreground ml-auto">Text</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">target_format</span>
-                <span className="text-muted-foreground ml-auto">VARCHAR(50)</span>
+                <span className="text-foreground">Target Format</span>
+                <span className="text-muted-foreground ml-auto">Text</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">priority</span>
-                <span className="text-muted-foreground ml-auto">ENUM('high','low')</span>
+                <span className="text-foreground">Priority</span>
+                <span className="text-muted-foreground ml-auto">High / Low</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">status</span>
-                <span className="text-muted-foreground ml-auto">ENUM(...)</span>
+                <span className="text-foreground">Status</span>
+                <span className="text-muted-foreground ml-auto">Job State</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">created_at</span>
-                <span className="text-muted-foreground ml-auto">TIMESTAMP</span>
+                <span className="text-foreground">Created At</span>
+                <span className="text-muted-foreground ml-auto">Timestamp</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">queued_at</span>
-                <span className="text-muted-foreground ml-auto">TIMESTAMP NULL</span>
+                <span className="text-foreground">Queued At</span>
+                <span className="text-muted-foreground ml-auto">Timestamp</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">started_at</span>
-                <span className="text-muted-foreground ml-auto">TIMESTAMP NULL</span>
+                <span className="text-foreground">Started At</span>
+                <span className="text-muted-foreground ml-auto">Timestamp</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">completed_at</span>
-                <span className="text-muted-foreground ml-auto">TIMESTAMP NULL</span>
+                <span className="text-foreground">Completed At</span>
+                <span className="text-muted-foreground ml-auto">Timestamp</span>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ export const DatabaseSchema = () => {
             <div className="flex items-center gap-2 mb-4">
               <Database className="h-4 w-4 text-accent" />
               <span className="font-mono text-sm font-semibold text-foreground">
-                JobMetrics
+                Job Metrics Table
               </span>
               <span className="font-mono text-xs text-muted-foreground">
                 (Resource Usage)
@@ -96,28 +96,28 @@ export const DatabaseSchema = () => {
             <div className="space-y-2 font-mono text-xs">
               <div className="flex items-center gap-2 p-2 rounded bg-background/50 border border-primary/20">
                 <Key className="h-3 w-3 text-primary" />
-                <span className="text-primary font-semibold">id</span>
-                <span className="text-muted-foreground ml-auto">VARCHAR(50) PK</span>
+                <span className="text-primary font-semibold">ID</span>
+                <span className="text-muted-foreground ml-auto">Primary Key</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50 border border-accent/20">
                 <Link2 className="h-3 w-3 text-accent" />
-                <span className="text-accent">job_id</span>
-                <span className="text-muted-foreground ml-auto">VARCHAR(50) FK</span>
+                <span className="text-accent">Job ID</span>
+                <span className="text-muted-foreground ml-auto">Links to Job</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">peak_cpu_usage</span>
-                <span className="text-muted-foreground ml-auto">INTEGER</span>
+                <span className="text-foreground">Peak CPU Usage</span>
+                <span className="text-muted-foreground ml-auto">Percentage</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">memory_usage_mb</span>
-                <span className="text-muted-foreground ml-auto">INTEGER</span>
+                <span className="text-foreground">Memory Usage</span>
+                <span className="text-muted-foreground ml-auto">Megabytes</span>
               </div>
               <div className="flex items-center gap-2 p-2 rounded bg-background/50">
                 <span className="w-3" />
-                <span className="text-foreground">created_at</span>
-                <span className="text-muted-foreground ml-auto">TIMESTAMP</span>
+                <span className="text-foreground">Created At</span>
+                <span className="text-muted-foreground ml-auto">Timestamp</span>
               </div>
             </div>
             
@@ -126,7 +126,7 @@ export const DatabaseSchema = () => {
               <div className="flex items-center gap-2 text-xs">
                 <Link2 className="h-3 w-3 text-accent" />
                 <span className="font-mono text-muted-foreground">
-                  JobMetrics.job_id → Job.id (One-to-One)
+                  One Job has One Metrics Record
                 </span>
               </div>
             </div>
@@ -137,9 +137,8 @@ export const DatabaseSchema = () => {
         <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
           <p className="font-mono text-xs text-muted-foreground">
             <span className="text-foreground font-semibold">Design Note:</span> The schema separates 
-            operational state (Job table) from resource metrics (JobMetrics table) for efficient 
-            querying. Status updates are frequent during processing, while metrics are written 
-            only once upon completion.
+            job state from resource metrics for efficient querying. Status updates happen frequently 
+            during processing, while metrics are saved only once when the job completes.
           </p>
         </div>
       </CardContent>
