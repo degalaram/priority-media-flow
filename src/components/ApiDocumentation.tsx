@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Code, Send, Search } from "lucide-react";
+import { Code, Send, Search, FileText, CheckCircle, ArrowRight } from "lucide-react";
 
 export const ApiDocumentation = () => {
   return (
@@ -11,9 +11,9 @@ export const ApiDocumentation = () => {
             <Code className="h-5 w-5 text-accent" />
           </div>
           <div>
-            <CardTitle className="font-mono text-xl">API Documentation</CardTitle>
+            <CardTitle className="font-mono text-xl">API Endpoints</CardTitle>
             <CardDescription className="font-mono text-xs">
-              REST API Endpoints - Django REST Framework
+              REST API for Job Management
             </CardDescription>
           </div>
         </div>
@@ -24,17 +24,17 @@ export const ApiDocumentation = () => {
           <TabsList className="grid w-full grid-cols-2 bg-muted/50">
             <TabsTrigger value="submit" className="font-mono text-xs">
               <Send className="h-3 w-3 mr-2" />
-              POST /submit_job
+              Submit Job
             </TabsTrigger>
             <TabsTrigger value="status" className="font-mono text-xs">
               <Search className="h-3 w-3 mr-2" />
-              GET /job/{'{id}'}/status
+              Get Status
             </TabsTrigger>
           </TabsList>
           
           <TabsContent value="submit" className="space-y-4 mt-4">
             {/* Endpoint Info */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="px-2 py-1 rounded bg-success/20 text-success font-mono text-xs font-bold">
                 POST
               </span>
@@ -44,66 +44,89 @@ export const ApiDocumentation = () => {
             </div>
             
             <p className="font-mono text-xs text-muted-foreground">
-              Submit a new media processing job. The job is instantly persisted and routed 
-              to the appropriate priority queue.
+              Submit a new media processing job. The job is saved instantly and sent to the right priority queue.
             </p>
             
-            {/* Request */}
-            <div className="space-y-2">
-              <span className="font-mono text-xs text-foreground font-semibold">
-                Request Body
+            {/* Required Fields - Visual Table */}
+            <div className="space-y-3">
+              <span className="font-mono text-xs text-foreground font-semibold flex items-center gap-2">
+                <FileText className="h-3 w-3" />
+                Required Fields
               </span>
-              <pre className="p-4 rounded-lg bg-background/80 border border-border/50 overflow-x-auto">
-                <code className="font-mono text-xs text-foreground">
-{`{
-  "source_file": "sample.mp4",
-  "target_format": "avi",
-  "priority": "high"  // "high" | "low"
-}`}
-                </code>
-              </pre>
+              <div className="rounded-lg border border-border/50 overflow-hidden">
+                <div className="grid grid-cols-3 bg-muted/50 p-3 border-b border-border/50">
+                  <span className="font-mono text-xs text-muted-foreground font-medium">Field</span>
+                  <span className="font-mono text-xs text-muted-foreground font-medium">Type</span>
+                  <span className="font-mono text-xs text-muted-foreground font-medium">Description</span>
+                </div>
+                <div className="grid grid-cols-3 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-primary">source_file</span>
+                  <span className="font-mono text-xs text-muted-foreground">String</span>
+                  <span className="font-mono text-xs text-foreground">Input file name</span>
+                </div>
+                <div className="grid grid-cols-3 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-primary">target_format</span>
+                  <span className="font-mono text-xs text-muted-foreground">String</span>
+                  <span className="font-mono text-xs text-foreground">Output format (mp4, avi, etc.)</span>
+                </div>
+                <div className="grid grid-cols-3 p-3">
+                  <span className="font-mono text-xs text-primary">priority</span>
+                  <span className="font-mono text-xs text-muted-foreground">String</span>
+                  <span className="font-mono text-xs text-foreground">"high" or "low"</span>
+                </div>
+              </div>
             </div>
             
-            {/* Response */}
-            <div className="space-y-2">
-              <span className="font-mono text-xs text-foreground font-semibold">
+            {/* Response Fields */}
+            <div className="space-y-3">
+              <span className="font-mono text-xs text-foreground font-semibold flex items-center gap-2">
+                <CheckCircle className="h-3 w-3 text-success" />
                 Response (201 Created)
               </span>
-              <pre className="p-4 rounded-lg bg-background/80 border border-border/50 overflow-x-auto">
-                <code className="font-mono text-xs text-foreground">
-{`{
-  "job_id": "job_1703567890_abc123def",
-  "status": "PENDING",
-  "priority": "high",
-  "source_file": "sample.mp4",
-  "target_format": "avi",
-  "created_at": "2024-12-26T10:30:00Z",
-  "queued_at": null,
-  "started_at": null,
-  "completed_at": null,
-  "message": "Job submitted successfully"
-}`}
-                </code>
-              </pre>
+              <div className="rounded-lg border border-border/50 overflow-hidden">
+                <div className="grid grid-cols-2 bg-muted/50 p-3 border-b border-border/50">
+                  <span className="font-mono text-xs text-muted-foreground font-medium">Field</span>
+                  <span className="font-mono text-xs text-muted-foreground font-medium">Description</span>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-foreground">job_id</span>
+                  <span className="font-mono text-xs text-muted-foreground">Unique identifier for tracking</span>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-foreground">status</span>
+                  <span className="font-mono text-xs text-muted-foreground">Initial status (PENDING)</span>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-foreground">created_at</span>
+                  <span className="font-mono text-xs text-muted-foreground">Timestamp when job was created</span>
+                </div>
+                <div className="grid grid-cols-2 p-3">
+                  <span className="font-mono text-xs text-foreground">message</span>
+                  <span className="font-mono text-xs text-muted-foreground">Success confirmation</span>
+                </div>
+              </div>
             </div>
             
-            {/* Behavior */}
-            <div className="p-3 rounded-lg bg-primary/5 border border-primary/20">
-              <span className="font-mono text-xs text-foreground font-semibold block mb-2">
-                Behavior
+            {/* Behavior Flow */}
+            <div className="p-4 rounded-lg bg-primary/5 border border-primary/20">
+              <span className="font-mono text-xs text-foreground font-semibold block mb-3">
+                What Happens When You Submit
               </span>
-              <ul className="font-mono text-xs text-muted-foreground space-y-1 list-disc list-inside">
-                <li>Validates required fields (source_file, target_format, priority)</li>
-                <li>Creates job record with PENDING status</li>
-                <li>Transitions to QUEUED and routes to Celery queue</li>
-                <li>Returns job_id for status tracking</li>
-              </ul>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-2 py-1 rounded bg-muted text-xs font-mono">Validate Input</span>
+                <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                <span className="px-2 py-1 rounded bg-muted text-xs font-mono">Save to Database</span>
+                <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                <span className="px-2 py-1 rounded bg-muted text-xs font-mono">Add to Queue</span>
+                <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                <span className="px-2 py-1 rounded bg-success/20 text-success text-xs font-mono">Return Job ID</span>
+              </div>
             </div>
           </TabsContent>
           
           <TabsContent value="status" className="space-y-4 mt-4">
             {/* Endpoint Info */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="px-2 py-1 rounded bg-primary/20 text-primary font-mono text-xs font-bold">
                 GET
               </span>
@@ -113,83 +136,85 @@ export const ApiDocumentation = () => {
             </div>
             
             <p className="font-mono text-xs text-muted-foreground">
-              Retrieve the current state and resource trace for a specific job.
+              Get the current status and resource usage for a specific job.
             </p>
             
-            {/* Path Parameters */}
-            <div className="space-y-2">
+            {/* Path Parameter */}
+            <div className="p-3 rounded-lg bg-muted/30 border border-border/50">
+              <div className="flex items-center gap-3 font-mono text-xs">
+                <span className="px-2 py-1 rounded bg-primary/20 text-primary font-medium">id</span>
+                <span className="text-muted-foreground">Job identifier returned from submit</span>
+              </div>
+            </div>
+            
+            {/* Response Fields */}
+            <div className="space-y-3">
               <span className="font-mono text-xs text-foreground font-semibold">
-                Path Parameters
+                Response Fields
               </span>
-              <div className="p-3 rounded-lg bg-background/80 border border-border/50">
-                <div className="flex items-center gap-2 font-mono text-xs">
-                  <span className="text-primary">id</span>
-                  <span className="text-muted-foreground">string (required)</span>
-                  <span className="text-muted-foreground/70">- Job identifier</span>
+              <div className="rounded-lg border border-border/50 overflow-hidden">
+                <div className="grid grid-cols-2 bg-muted/50 p-3 border-b border-border/50">
+                  <span className="font-mono text-xs text-muted-foreground font-medium">Field</span>
+                  <span className="font-mono text-xs text-muted-foreground font-medium">Description</span>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-foreground">status</span>
+                  <span className="font-mono text-xs text-muted-foreground">PENDING, QUEUED, IN_PROGRESS, COMPLETED, FAILED</span>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-foreground">priority</span>
+                  <span className="font-mono text-xs text-muted-foreground">High or Low</span>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-foreground">queued_at</span>
+                  <span className="font-mono text-xs text-muted-foreground">When job entered queue</span>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-foreground">started_at</span>
+                  <span className="font-mono text-xs text-muted-foreground">When processing began</span>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-b border-border/30">
+                  <span className="font-mono text-xs text-foreground">completed_at</span>
+                  <span className="font-mono text-xs text-muted-foreground">When processing finished</span>
+                </div>
+                <div className="grid grid-cols-2 p-3">
+                  <span className="font-mono text-xs text-foreground">metrics</span>
+                  <span className="font-mono text-xs text-muted-foreground">CPU and memory usage (when complete)</span>
                 </div>
               </div>
             </div>
             
-            {/* Response - In Progress */}
-            <div className="space-y-2">
-              <span className="font-mono text-xs text-foreground font-semibold">
-                Response (200 OK) - In Progress
+            {/* Status Values */}
+            <div className="p-4 rounded-lg bg-muted/30 border border-border/50">
+              <span className="font-mono text-xs text-foreground font-semibold block mb-3">
+                Job Status Values
               </span>
-              <pre className="p-4 rounded-lg bg-background/80 border border-border/50 overflow-x-auto">
-                <code className="font-mono text-xs text-foreground">
-{`{
-  "job_id": "job_1703567890_abc123def",
-  "status": "IN_PROGRESS",
-  "priority": "high",
-  "source_file": "sample.mp4",
-  "target_format": "avi",
-  "queued_at": "2024-12-26T10:30:01Z",
-  "started_at": "2024-12-26T10:30:02Z",
-  "completed_at": null,
-  "metrics": null
-}`}
-                </code>
-              </pre>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2 py-1 rounded bg-muted-foreground/20 text-xs font-mono">PENDING</span>
+                <ArrowRight className="h-3 w-3 text-muted-foreground self-center" />
+                <span className="px-2 py-1 rounded bg-primary/20 text-primary text-xs font-mono">QUEUED</span>
+                <ArrowRight className="h-3 w-3 text-muted-foreground self-center" />
+                <span className="px-2 py-1 rounded bg-warning/20 text-warning text-xs font-mono">IN_PROGRESS</span>
+                <ArrowRight className="h-3 w-3 text-muted-foreground self-center" />
+                <span className="px-2 py-1 rounded bg-success/20 text-success text-xs font-mono">COMPLETED</span>
+              </div>
             </div>
             
-            {/* Response - Completed */}
-            <div className="space-y-2">
-              <span className="font-mono text-xs text-foreground font-semibold">
-                Response (200 OK) - Completed with Metrics
+            {/* Resource Metrics */}
+            <div className="p-4 rounded-lg bg-accent/5 border border-accent/20">
+              <span className="font-mono text-xs text-foreground font-semibold block mb-3">
+                Resource Metrics (Available when completed)
               </span>
-              <pre className="p-4 rounded-lg bg-background/80 border border-border/50 overflow-x-auto">
-                <code className="font-mono text-xs text-foreground">
-{`{
-  "job_id": "job_1703567890_abc123def",
-  "status": "COMPLETED",
-  "priority": "high",
-  "source_file": "sample.mp4",
-  "target_format": "avi",
-  "queued_at": "2024-12-26T10:30:01Z",
-  "started_at": "2024-12-26T10:30:02Z",
-  "completed_at": "2024-12-26T10:30:09Z",
-  "metrics": {
-    "peak_cpu_usage": 75,
-    "memory_usage_mb": 512
-  }
-}`}
-                </code>
-              </pre>
-            </div>
-            
-            {/* 404 Response */}
-            <div className="space-y-2">
-              <span className="font-mono text-xs text-foreground font-semibold">
-                Response (404 Not Found)
-              </span>
-              <pre className="p-4 rounded-lg bg-background/80 border border-destructive/30 overflow-x-auto">
-                <code className="font-mono text-xs text-foreground">
-{`{
-  "error": "Job not found",
-  "job_id": "invalid_job_id"
-}`}
-                </code>
-              </pre>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-high-priority"></div>
+                  <span className="font-mono text-xs text-muted-foreground">Peak CPU Usage (%)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-low-priority"></div>
+                  <span className="font-mono text-xs text-muted-foreground">Memory Usage (MB)</span>
+                </div>
+              </div>
             </div>
           </TabsContent>
         </Tabs>
